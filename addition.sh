@@ -2,9 +2,9 @@
 NUM1=$1
 NUM2=$2
 
-if [ $# -lt 2]
+if echo "$NUM1" | grep -qE '^[0-9]+$'
  then
-     echo "Please the 2 numbers for addition"
+     echo "Please enter the number in Argument 1"
      exit 1
 fi
 
