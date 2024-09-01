@@ -2,7 +2,7 @@
 NUM1=$1
 NUM2=$2
 
-if echo "$NUM1" | grep -qE '^[0-9]+$'
+if [[ $NUM1 =~ ^[0-9]+$ ]]
  then
      echo "Please enter the number in Argument 1"
      exit 1
