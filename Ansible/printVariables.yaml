@@ -1,23 +1,22 @@
+---
 - name: print the variables
-  host: local
+  hosts: local
   vars: 
     course: "devops course"
     duration: 120
     topics:
-    - linux
-    - shell
-    - ansible
-    - teraform
-    - AWS
-    - K8
-    live : true
+      - linux
+      - shell
+      - ansible
+      - terraform
+      - AWS
+      - K8
+    live: true
     tools:
       ci: jenkins
       cm: ansible
       cloud: aws
   tasks:
-  - name: print the course information
-    ansible.builtin.debug:
-    msg: "Hi, i am learning {{course}}, with duration: {{duration}}, topics are: {{topics}} and live: {{live}} , tools are: {{tools}}"
-  
-  
+    - name: print the course information
+      ansible.builtin.debug:
+        msg: "Hi, I am learning {{ course }}, with duration: {{ duration }}, topics are: {{ topics }} and live: {{ live }}, tools are: {{ tools }}"
