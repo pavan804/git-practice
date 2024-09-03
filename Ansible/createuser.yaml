@@ -1,0 +1,20 @@
+---
+- name: create user expense
+  hosts: local
+  become: yes
+  tasks:
+    - name: check user exist or not
+      ansible.builtin.command: id expense
+      register: USER
+      ignore_errors: True
+
+    - name: print the user info
+      ansible.builtin.debug:
+        msg: "user info: {{USER}}"
+
+    - name: create if user not exist
+      ansible.builtin.command: useradd expense
+      when: USER.rc != 0
+
+    
+    
