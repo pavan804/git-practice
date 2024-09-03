@@ -10,11 +10,11 @@
     - teraform
     - AWS
     - K8
-   live : true
-   tools:
-    ci: jenkins
-    cm: ansible
-    cloud: aws
+    live : true
+    tools:
+      ci: jenkins
+      cm: ansible
+      cloud: aws
   tasks:
   - name: print the course information
     ansible.builtin.debug:
