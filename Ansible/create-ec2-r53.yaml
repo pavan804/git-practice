@@ -38,7 +38,7 @@
         overwrite: true
       loop: "{{ ec2_instances.results }}"
 
-     - name: add the route53 public record
+    - name: add the route53 public record
       amazon.aws.route53:
         state: present
         zone: "{{ zone }}"
