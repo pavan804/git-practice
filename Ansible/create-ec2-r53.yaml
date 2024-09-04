@@ -13,11 +13,10 @@
   tasks:
     - name: create ec2 instance
         amazon.aws.ec2_instance:
-          name: "{{ item }}"
-          vpc_subnet_id: "{{ SUBNETID }}"
-          instance_type: "t3.micro"
-          security_group: "{{ secuerity_group_id }}"
-          image_id: "{{ ami_id }}"
+         name: "{{ item }}"
+         vpc_subnet_id: "{{ SUBNETID }}"
+         instance_type: "t3.micro"
+         security_group: "{{ secuerity_group_id }}"
+         image_id: "{{ ami_id }}"
         loop: "{{ instances }}"
         register: ec2-instance
-          
