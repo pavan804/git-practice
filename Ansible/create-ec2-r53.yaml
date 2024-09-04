@@ -22,14 +22,18 @@
       loop: "{{ instances }}"
       register: ec2_instances
 
-    - name: add the route53 records
-      amazon.aws.route53:
-        state: present
-        zone: "{{ zone }}"
-        record: "{{ item.item }}.{{ zone }}"
-        type: A
-        ttl: 1
-        value: "{{ item.instances[0].private_ip_addresses }}"
-        wait_timeout: 300
-        override: true
-      loop: "{{ ec2_instances.results }}"
+    - name: print the results
+      ansible.builtin.debug:
+      msg: "{{ ec2_instances }}"
+
+    # - name: add the route53 records
+    #   amazon.aws.route53:
+    #     state: present
+    #     zone: "{{ zone }}"
+    #     record: "{{ item.item }}.{{ zone }}"
+    #     type: A
+    #     ttl: 1
+    #     value: "{{ item.instances[0].private_ip_addresses }}"
+    #     wait_timeout: 300
+    #     override: true
+    #   loop: "{{ ec2_instances.results }}"
