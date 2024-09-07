@@ -32,3 +32,13 @@
         src: /tmp/backend.zip
         dest: /app
         remote_src: yes
+
+    - name: redirect to app directory
+      ansible.builtin.shell: cd /app
+
+    - name: Install the Node.js package
+      ansible.builtin.package:
+        name: npm
+        state: present
+
+    
