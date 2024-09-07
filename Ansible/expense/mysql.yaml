@@ -6,11 +6,10 @@
     login_host: mysql.pavandevopssept2024.online
 
   tasks:
-    - name: install boto3 and botocore
+    - name: install pymysql
       ansible.builtin.pip:
         name: 
-          - boto3
-          - botocore
+          - PyMySQL
         executable: pip3.9
 
     - name: installing the mysql server 
