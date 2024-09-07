@@ -1,6 +1,10 @@
 - name: MySQL configuration
   hosts: backend
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
+    login_host: mysql.pavandevopssept2024.online
+    
   tasks:
     - name: Disable the Node.js module
       ansible.builtin.command: dnf module disable nodejs -y
@@ -37,8 +41,18 @@
       ansible.builtin.shell: cd /app
 
     - name: Install the Node.js package
-      ansible.builtin.package:
-        name: npm
-        state: present
+      ansible.builtin.command: npm install
+
+    - name: copy the backend service file
+      ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+    - name: connecting to sql server
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        login_host: "{{ login_host }}"
+      
 
     
