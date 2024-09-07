@@ -48,8 +48,10 @@
         dest: /etc/systemd/system/backend.service
 
     - name: Connecting to MySQL server
-      community.mysql.mysql_info:
+      community.mysql.mysql_db:
         login_user: root
         login_password: "{{ mysql_root_password }}"
         login_host: "{{ login_host }}"
-        target: 
+        target: /app/schema/backend.sql
+        name: all
+        state: dump
