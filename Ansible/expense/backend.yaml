@@ -37,22 +37,19 @@
         dest: /app
         remote_src: yes
 
-    - name: redirect to app directory
-      ansible.builtin.shell: cd /app
-
-    - name: Install the Node.js package
+    - name: Install the Node.js dependencies
       ansible.builtin.command: npm install
+      args:
+        chdir: /app
 
-    - name: copy the backend service file
+    - name: Copy the backend service file
       ansible.builtin.copy:
-      src: backend.service
-      dest: /etc/systemd/system/backend.service
+        src: backend.service
+        dest: /etc/systemd/system/backend.service
 
-    - name: connecting to sql server
+    - name: Connecting to MySQL server
       community.mysql.mysql_info:
         login_user: root
         login_password: "{{ mysql_root_password }}"
         login_host: "{{ login_host }}"
-      
-
-    
+        target: 
