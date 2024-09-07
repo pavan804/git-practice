@@ -1,0 +1,16 @@
+- name: mysql configuration
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: disable the nodejs
+    ansible.builtin.command: dnf module disable nodejs -y
+
+  - name: enable the nodejs version 20
+    ansible.builtin.command: dnf module enable nodejs:20 -y
+
+  - name: install the nodejs package
+    ansible.builtin.package:
+      name: nodejs
+      state: present
+
+  
