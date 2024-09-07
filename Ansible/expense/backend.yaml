@@ -12,10 +12,13 @@
     - name: Enable the Node.js version 20 module
       ansible.builtin.command: dnf module enable nodejs:20 -y
 
-    - name: Install the Node.js package
+    - name: Install the Node.js and MySQL packages
       ansible.builtin.package:
-        name: nodejs
+        name: "{{ item }}"
         state: present
+      loop: 
+        - nodejs
+        - mysql
 
     - name: Create the expense user
       ansible.builtin.user:
@@ -47,17 +50,22 @@
         src: backend.service
         dest: /etc/systemd/system/backend.service
 
-    - name: install pymysql
+    - name: Install PyMySQL
       ansible.builtin.pip:
         name: 
           - PyMySQL
         executable: pip3.9
 
-    - name: Connecting to MySQL server
+    - name: Import the MySQL schema
       community.mysql.mysql_db:
         login_user: root
         login_password: "{{ mysql_root_password }}"
         login_host: "{{ login_host }}"
+        state: import
         target: /app/schema/backend.sql
-        name: all
-        state: dump
+
+    - name: Start the backend service
+      ansible.builtin.systemd:
+        name: backend.service
+        state: started
+        enabled: yes
