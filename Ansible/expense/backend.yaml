@@ -62,10 +62,6 @@
         login_password: "{{ mysql_root_password }}"
         login_host: "{{ login_host }}"
         state: import
-        target: /app/schema/backend.sql
+        name: all
+        state: dump
 
-    - name: Start the backend service
-      ansible.builtin.systemd:
-        name: backend.service
-        state: started
-        enabled: yes
