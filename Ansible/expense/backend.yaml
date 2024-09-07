@@ -1,5 +1,5 @@
 - name: mysql configuration
-  hosts: mysql
+  hosts: backend
   become: yes
   tasks:
   - name: disable the nodejs
@@ -12,5 +12,16 @@
     ansible.builtin.package:
       name: nodejs
       state: present
+
+  - name: create the expense user
+    ansible.builtin.user:
+      name: expense
+
+  - name: create the app directory 
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+    
 
   
