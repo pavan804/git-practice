@@ -8,6 +8,12 @@
         name: nginx
         state: present
 
+    - name: Test Nginx configuration
+      ansible.builtin.command:
+        cmd: nginx -t
+      register: nginx_test
+      failed_when: "'successful' not in nginx_test.stdout"
+
     - name: Start and enable Nginx service
       ansible.builtin.service:
         name: nginx
