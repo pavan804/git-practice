@@ -22,6 +22,18 @@
       path: /app
       state: directory
 
+  - name: download the application file and stored into the temp file
+    ansible.windows.win_get_url:
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+      dest: /tmp/backend.zip
+
+  - name: Unzip a application code to app directory
+    ansible.builtin.unarchive:
+      src: /tmp/backend.zip
+      dest: /app
+      remote_src: yes
+
+
     
 
   
