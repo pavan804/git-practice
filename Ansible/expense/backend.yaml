@@ -67,7 +67,8 @@
         state: import
 
     - name: Restart service backend, in all cases
-      ansible.builtin.service:
-         name: backend
-         state: restarted
+      ansible.builtin.systemd_service:
+        state: restarted
+        daemon_reload: true
+        name: crond
 
