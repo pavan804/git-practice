@@ -47,6 +47,12 @@
         src: backend.service
         dest: /etc/systemd/system/backend.service
 
+    - name: install pymysql
+      ansible.builtin.pip:
+        name: 
+          - PyMySQL
+        executable: pip3.9
+
     - name: Connecting to MySQL server
       community.mysql.mysql_db:
         login_user: root
